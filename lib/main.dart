@@ -1,5 +1,7 @@
 import 'package:app/pages/bottom_navegation.dart';
+import 'package:app/pages/category_page.dart';
 import 'package:app/pages/cadastrar_produto.dart';
+import 'package:app/pages/create_category_page.dart';
 import 'package:app/pages/criar_conta.dart';
 import 'package:app/pages/login_page.dart';
 import 'package:app/pages/recuperar_senha.dart';
@@ -22,7 +24,9 @@ class MyApp extends StatelessWidget {
         '/': (context)=>LoginPage(),
         '/bottomNavigation': (context)=>BottonNavigation(),
         '/homePage': (context)=>HomePage(),
+        '/categoryPage': (context)=>CategoryPage(),
         '/criarConta': (context)=>CriarConta(),
+        '/createCategory': (context)=>CreateCategoryPage(),
         '/recuperarSenha': (context)=>RecuperarSenha(),
         '/cadastrarProduto': (context)=>CadastrarProduto(),
       }

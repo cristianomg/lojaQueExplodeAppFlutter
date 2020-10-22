@@ -5,7 +5,7 @@ import 'package:app/models/authentication.dart';
 import 'package:http/http.dart' as http;
 class AuthService{
   static Future<Authentication> login(String email, String password)async{
-    var url = 'http://a07c596e34a0.ngrok.io/api/v1/Auth';
+    var url = 'http://07fafe782aab.ngrok.io/api/v1/Auth';
     var params = {"email": email, "password": password};
     print('aqui');
     print(params);

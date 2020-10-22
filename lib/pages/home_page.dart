@@ -41,18 +41,18 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Center(child: Image.network(p.imagemUrl, width: 150)),
+                    Center(child: Image.network(p.photos.first.url, width: 150)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(p.nome, style: TextStyle(fontSize: 20)),
+                      child: Text(p.name, style: TextStyle(fontSize: 20)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(p.descricao, style: TextStyle(fontSize: 20)),
+                      child: Text(p.description, style: TextStyle(fontSize: 20)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(p.preco.toString(), style: TextStyle(fontSize: 20)),
+                      child: Text(p.priceFormated.toString(), style: TextStyle(fontSize: 20)),
                     ),
                     ButtonTheme.bar(
                       child: ButtonBar(

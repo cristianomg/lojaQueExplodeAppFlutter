@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryService{
   static Future<List<Category>> getCategories() async{
-    var url = 'http://a07c596e34a0.ngrok.io/api/v1/category';
+    var url = 'http://07fafe782aab.ngrok.io/api/v1/category';
 
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -30,5 +30,33 @@ class CategoryService{
     }
 
     return categories;
+  }
+
+  static Future<String> createCategory(String name, String description) async {
+    var url = 'http://07fafe782aab.ngrok.io/api/v1/category';
+
+    var params = {
+      "name": name,
+      "description": description
+    };
+    var body = json.encode(params);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var token = prefs.getString('token');
+
+    var header = {'Content-Type': "application/json", "Authorization": 'Bearer $token'};
+
+    var response = await http.post(url, headers: header, body: body);
+
+    if (response.statusCode == 201){
+      return "Categoria cadastrado com sucesso.";
+    }
+    else if (response.statusCode == 401 || response.statusCode == 403){
+      return "Voce não tem permissão para essa função";
+    }
+    else{
+      return "Ocorreu um erro tente novamente.";
+    }
   }
 }

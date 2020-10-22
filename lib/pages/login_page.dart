@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     String password = this.password.text;
 
     var authentication = await AuthService.login(email, password);
+    print('aqui');
     if (authentication != null){
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', authentication.token);

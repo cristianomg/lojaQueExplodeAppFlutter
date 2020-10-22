@@ -1,3 +1,4 @@
+import 'package:app/pages/category_page.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/menu.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
 
   final _tabs = [
     HomePage(),
-    HomePage(),
+    CategoryPage(),
     HomePage(),
     MenuPage(),
   ];
@@ -30,7 +31,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
         unselectedFontSize: 15,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Pesquisa', backgroundColor: Colors.white),
+          BottomNavigationBarItem(icon: Icon(Icons.category_rounded), label: 'Categorias', backgroundColor: Colors.white),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Carrinho', backgroundColor: Colors.white),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Admin', backgroundColor: Colors.white)
         ],

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 class UserService{
   static Future<String> createUser(String name, String email, String password, String checkPassword, String phone)async{
-    var url = 'http://a07c596e34a0.ngrok.io/api/v1/User';
+    var url = 'http://07fafe782aab.ngrok.io/api/v1/User';
     var params = {
       "name": name,
       "password": password,
