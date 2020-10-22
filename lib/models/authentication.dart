@@ -1,25 +1,25 @@
-class Authentication {
-  bool authenticated;
-  String expiration;
-  String token;
-  String message;
+import 'package:app/models/user.dart';
 
-  Authentication(
-      {this.authenticated, this.expiration, this.token, this.message});
+class Authentication {
+  User user;
+  String token;
+  String permission;
+
+  Authentication({this.user, this.token, this.permission});
 
   Authentication.fromJson(Map<String, dynamic> json) {
-    authenticated = json['authenticated'];
-    expiration = json['expiration'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
     token = json['token'];
-    message = json['message'];
+    permission = json['permission'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['authenticated'] = this.authenticated;
-    data['expiration'] = this.expiration;
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
     data['token'] = this.token;
-    data['message'] = this.message;
+    data['permission'] = this.permission;
     return data;
   }
 }

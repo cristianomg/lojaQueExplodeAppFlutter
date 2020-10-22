@@ -1,43 +1,41 @@
+import 'package:app/models/category.dart';
+import 'package:app/services/CategoryService.dart';
+import 'package:app/services/ProductService.dart';
 import 'package:app/services/UserService.dart';
 import 'package:app/widgets/alert.dart';
 import 'package:flutter/material.dart';
 
-class CriarConta extends StatefulWidget {
-  const CriarConta({Key key}) : super(key: key);
+class CadastrarProduto extends StatefulWidget {
+  const CadastrarProduto({Key key}) : super(key: key);
 
   @override
-  _CriarContaState createState() => _CriarContaState();
+  _CadastrarProdutoState createState() => _CadastrarProdutoState();
 }
 
-class _CriarContaState extends State<CriarConta> {
+class _CadastrarProdutoState extends State<CadastrarProduto> {
     final name = TextEditingController();
-    final email = TextEditingController();
-    final password = TextEditingController();
-    final checkPassword = TextEditingController();
-    final phone = TextEditingController();
+    final description = TextEditingController();
+    final price = TextEditingController();
+    final quantity = TextEditingController();
+    final warrantyTime = TextEditingController();
+    final weight = TextEditingController();
     final _formKey = GlobalKey<FormState>();
 
-  void criarUsuario(BuildContext context) async {
+
+  void cadastrarProduto(BuildContext context) async {
     String name = this.name.text;
-    String email = this.email.text;
-    String password = this.password.text;
-    String checkPassword = this.checkPassword.text;
-    String phone = this.phone.text;
-    var resultCreateUser = await UserService.createUser(name, email, password, checkPassword, phone);
-
-    if (resultCreateUser == ""){
-      alert(context, "Usuário criado");
-      Navigator.pushNamed(context, "/");
-    }
-    else{
-      alert(context, resultCreateUser);
-    }
-  }
-
+    String description = this.description.text;
+    String price = this.price.text;
+    String quantity = this.quantity.text;
+    String warrantyTime = this.warrantyTime.text;
+    String weight = this.weight.text;
+    var resultCreateProduct = await ProductService.createProduct(name, description, "", int.parse(price), int.parse(quantity), int.parse(warrantyTime), int.parse(weight));
+    alert(context, resultCreateProduct);
+  }  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cadastro de usuário"), centerTitle: true, ),
+      appBar: AppBar(title: Text("Cadastro de produto"), centerTitle: true, ),
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(
@@ -49,6 +47,7 @@ class _CriarContaState extends State<CriarConta> {
           key: _formKey,
           child: ListView(
             children: [
+              // _listaCategorias(),
               TextFormField(
                   controller: name,
                   keyboardType: TextInputType.text,
@@ -63,10 +62,10 @@ class _CriarContaState extends State<CriarConta> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextFormField(
-                  controller: email,
-                  keyboardType: TextInputType.emailAddress,
+                  controller: description,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "E-mail",
+                    labelText: "Descrição",
                     labelStyle: TextStyle(
                       color: Colors.black38,
                       fontWeight: FontWeight.w400,
@@ -76,38 +75,49 @@ class _CriarContaState extends State<CriarConta> {
                   style: TextStyle(fontSize: 20),
                 ),
                 TextFormField(
-                  controller: password,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Senha",
-                    labelStyle: TextStyle(
-                      color: Colors.black38,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
-                ),
-                TextFormField(
-                  controller: checkPassword,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Confirme sua senha",
-                    labelStyle: TextStyle(
-                      color: Colors.black38,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
-                ),
-                TextFormField(
-                  controller: phone,
+                  controller: price,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: "Telefone",
+                    labelText: "preço",
+                    labelStyle: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: TextStyle(fontSize: 20),
+                ),
+                TextFormField(
+                  controller: quantity,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "quantidade",
+                    labelStyle: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: TextStyle(fontSize: 20),
+                ),
+                TextFormField(
+                  controller: warrantyTime,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "tempo de garantia",
+                    labelStyle: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: TextStyle(fontSize: 20),
+                ),                
+                TextFormField(
+                  controller: weight,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "peso",
                     labelStyle: TextStyle(
                       color: Colors.black38,
                       fontWeight: FontWeight.w400,
@@ -120,7 +130,7 @@ class _CriarContaState extends State<CriarConta> {
                 FlatButton(
                     color: Colors.blue,
                     child: Text("Criar", style: TextStyle(color: Colors.white)),
-                    onPressed: ()=>criarUsuario(context))
+                    onPressed: ()=>cadastrarProduto(context))
             ],  
           ),
         ),

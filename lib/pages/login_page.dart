@@ -1,6 +1,7 @@
 import 'package:app/services/AuthService.dart';
 import 'package:app/widgets/alert.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,7 +24,9 @@ class _LoginPageState extends State<LoginPage> {
 
     var authentication = await AuthService.login(email, password);
     if (authentication != null){
-      Navigator.pushNamed(context, "/homePage");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', authentication.token);
+      Navigator.pushNamed(context, "/bottomNavigation");
     }
     else{
       alert(context, "Email e/ou senha invalidos.");

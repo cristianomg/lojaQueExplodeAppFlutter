@@ -1,8 +1,6 @@
 import 'package:app/models/product.dart';
 import 'package:app/services/ProductService.dart';
 import 'package:flutter/material.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
-import 'package:loading/loading.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +11,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Catalogo de produtos"), centerTitle: true,),
       body: _body()
     );
   }
@@ -23,16 +20,15 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder(
       future: products,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (!snapshot.hasData) {
+          return Center(
+          child: CircularProgressIndicator(
+          )
+        );
+      }
           List<Product> products = snapshot.data;
           return _listViewProducts(products);
-        } else {
-          return Center(
-          child: Loading(indicator: BallPulseIndicator(), size: 100.0,color: Colors.blue),
-        );
         }
-      },
-      initialData: new List<Product>(),
     );
   }
 
