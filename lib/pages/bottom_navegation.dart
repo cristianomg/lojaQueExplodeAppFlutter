@@ -3,6 +3,8 @@ import 'package:app/pages/home_page.dart';
 import 'package:app/pages/menu.dart';
 import 'package:flutter/material.dart';
 
+import 'cart_opend.dart';
+
 class BottonNavigation extends StatefulWidget {
   @override
   _BottonNavigationState createState() => _BottonNavigationState();
@@ -14,14 +16,17 @@ class _BottonNavigationState extends State<BottonNavigation> {
   final _tabs = [
     HomePage(),
     CategoryPage(),
-    HomePage(),
+    CartOpendPage(),
     MenuPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Loja do eletronico"), centerTitle: true,),
+      appBar: AppBar(
+        title: Text("Loja do eletronico"),
+        centerTitle: true,
+      ),
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -30,12 +35,24 @@ class _BottonNavigationState extends State<BottonNavigation> {
         selectedFontSize: 20,
         unselectedFontSize: 15,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.category_rounded), label: 'Categorias', backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Carrinho', backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Admin', backgroundColor: Colors.white)
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category_rounded),
+              label: 'Categorias',
+              backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Carrinho',
+              backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Admin',
+              backgroundColor: Colors.white)
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });

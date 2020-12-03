@@ -5,9 +5,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CategoryService{
+import 'BaseService.dart';
+
+class CategoryService {
   static Future<List<Category>> getCategories() async{
-    var url = 'http://07fafe782aab.ngrok.io/api/v1/category';
+    var url =  BaseService.baseUrl + '/category';
 
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,7 +35,7 @@ class CategoryService{
   }
 
   static Future<String> createCategory(String name, String description) async {
-    var url = 'http://07fafe782aab.ngrok.io/api/v1/category';
+    var url =  BaseService.baseUrl + '/category';
 
     var params = {
       "name": name,

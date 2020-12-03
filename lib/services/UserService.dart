@@ -1,9 +1,12 @@
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-class UserService{
-  static Future<String> createUser(String name, String email, String password, String checkPassword, String phone)async{
-    var url = 'http://07fafe782aab.ngrok.io/api/v1/User';
+
+import 'BaseService.dart';
+
+class UserService {
+  static Future<String> createUser(String name, String email, String password,
+      String checkPassword, String phone) async {
+    var url = BaseService.baseUrl + '/User';
     var params = {
       "name": name,
       "password": password,
@@ -14,11 +17,9 @@ class UserService{
     var body = json.encode(params);
     var header = {'Content-Type': "application/json"};
 
-    print(body);
     var response = await http.post(url, headers: header, body: body);
-    
-    print(response.statusCode);
-    if (response.statusCode == 201){
+
+    if (response.statusCode == 201) {
       return "";
     }
     return "Ocorreu um erro interno tente novamente.";

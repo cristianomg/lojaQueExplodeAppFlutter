@@ -1,38 +1,43 @@
-
-import 'package:app/models/photos.dart';
+import 'category.dart';
+import 'complementaryProductData.dart';
+import 'photos.dart';
 
 class Product {
+  String id;
   String name;
   String description;
   String categoryId;
   int price;
-  double priceFormated;
   int quantity;
-  Null category;
-  Null complementaryProductData;
+  Category category;
+  ComplementaryProductData complementaryProductData;
   List<Photos> photos;
 
   Product(
-      {this.name,
+      {this.id,
+      this.name,
       this.description,
       this.categoryId,
       this.price,
       this.quantity,
       this.category,
       this.complementaryProductData,
-      this.photos}){
-        this.priceFormated = this.price / 100;
-      }
+      this.photos});
 
   Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     description = json['description'];
     categoryId = json['categoryId'];
     price = json['price'];
     quantity = json['quantity'];
-    category = json['category'];
-    complementaryProductData = json['complementaryProductData'];
-    priceFormated = price / 100;
+    category = json['category'] != null
+        ? new Category.fromJson(json['category'])
+        : null;
+    complementaryProductData = json['complementaryProductData'] != null
+        ? new ComplementaryProductData.fromJson(
+            json['complementaryProductData'])
+        : null;
     if (json['photos'] != null) {
       photos = new List<Photos>();
       json['photos'].forEach((v) {
@@ -43,13 +48,18 @@ class Product {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['name'] = this.name;
     data['description'] = this.description;
     data['categoryId'] = this.categoryId;
     data['price'] = this.price;
     data['quantity'] = this.quantity;
-    data['category'] = this.category;
-    data['complementaryProductData'] = this.complementaryProductData;
+    if (this.category != null) {
+      data['category'] = this.category.toJson();
+    }
+    if (this.complementaryProductData != null) {
+      data['complementaryProductData'] = this.complementaryProductData.toJson();
+    }
     if (this.photos != null) {
       data['photos'] = this.photos.map((v) => v.toJson()).toList();
     }

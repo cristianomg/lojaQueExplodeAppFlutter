@@ -1,12 +1,14 @@
-class Category {
+class PurchaseStatus {
   String id;
+  int code;
   String name;
   String description;
 
-  Category({this.id, this.name, this.description});
+  PurchaseStatus({this.id, this.code, this.name, this.description});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  PurchaseStatus.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    code = json['code'];
     name = json['name'];
     description = json['description'];
   }
@@ -14,6 +16,7 @@ class Category {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['code'] = this.code;
     data['name'] = this.name;
     data['description'] = this.description;
     return data;
